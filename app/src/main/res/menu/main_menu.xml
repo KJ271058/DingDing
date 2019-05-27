@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/main_btn"
+        android:icon="@mipmap/main_btn_off"
+        android:title="主页"/>
+    <item
+        android:id="@+id/moving_btn"
+        android:icon="@mipmap/moving_btn_on"
+        android:title="操场"/>
+    <item
+        android:id="@+id/news_btn"
+        android:icon="@mipmap/news_btn_off"
+        android:title="消息"/>
+    <item
+        android:id="@+id/wode_btn"
+        android:icon="@mipmap/wode_btn_off"
+        android:title="消息"/>
+</menu>
