@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.andview.refreshview.XRefreshView;
 import com.example.administrator.testclient.MyApplication;
 import com.example.administrator.testclient.R;
+import com.example.administrator.testclient.adapter.MovingItemAdapter;
 import com.example.administrator.testclient.adapter.TextItemAdapter;
 import com.example.administrator.testclient.bean.ImgUrl;
 import com.example.administrator.testclient.view.MyListView;
@@ -29,12 +30,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import static java.lang.Thread.sleep;
+
 //import com.facebook.drawee.view.SimpleDraweeView;
 
 public class Fragment_main extends MyFragment {
     @BindView(R.id.line1)
     MyListView line1;
-    List<String> list = new ArrayList<>();
     @BindView(R.id.scrollable)
     ScrollView scrollable;
     @BindView(R.id.suo_text)
@@ -45,12 +47,13 @@ public class Fragment_main extends MyFragment {
     XBanner banner;
     @BindView(R.id.refresh)
     XRefreshView refresh;
+    List<String> list = new ArrayList<>();
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-
-            line1.setAdapter(new TextItemAdapter(list));
+            success();
+            line1.setAdapter(new MovingItemAdapter(list));
             initBanner();
         }
     };
@@ -63,18 +66,16 @@ public class Fragment_main extends MyFragment {
     }
 
     private void setRefresh() {
+        refresh.setMoveForHorizontal(true);
         refresh.setPullLoadEnable(true);
         refresh.setXRefreshViewListener(new XRefreshView.XRefreshViewListener() {
             @Override
             public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        list.clear();
-                        getInfor();
-                        refresh.stopRefresh();
-                    }
-                },2000);
+                new Handler().postDelayed(() -> {
+                    list.clear();
+                    getInfor();
+                    refresh.stopRefresh();
+                }, 2000);
             }
 
             @Override
@@ -84,12 +85,11 @@ public class Fragment_main extends MyFragment {
 
             @Override
             public void onLoadMore(boolean isSilence) {
-                new Handler().postDelayed(new Runnable() {
-                    public void run() {
-                        //填写加载更多的网络请求，一般page++
-                       getInfor();
-                       refresh.stopLoadMore();
-                    }
+
+                new Handler().postDelayed(() -> {
+                    //填写加载更多的网络请求，一般page++
+                    getInfor();
+                    refresh.stopLoadMore();
                 }, 1000);
             }
 
@@ -139,7 +139,7 @@ public class Fragment_main extends MyFragment {
 
     @Override
     public Object getData() {
-        return "12";
+        return 1;
     }
 
     @Override

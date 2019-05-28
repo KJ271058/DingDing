@@ -3,5 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <com.andview.refreshview.XRefreshView
+        android:id="@+id/refresh"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.andview.refreshview.XScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.example.administrator.testclient.view.MyListView
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
+            </com.example.administrator.testclient.view.MyListView>
+        </com.andview.refreshview.XScrollView>
+    </com.andview.refreshview.XRefreshView>
 </LinearLayout>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TestClient</string>
+    <string name="app_name">叮叮</string>
     <string name="show">显示</string>
     <string name="find">查询</string>
     <string name="user_login">用户登录</string>
@@ -10,4 +10,9 @@
     <string name="forget_password">忘记密码?</string>
     <string name="register">注册</string>
     <string name="no_data">无数据</string>
+    <string name="moving_name">幺幺零</string>
+    <string name="moving_time">分钟前</string>
+    <string name="attention_on">已关注</string>
+    <string name="attention_off">未关注</string>
+    <string name="moving_data">如果生活欺骗了你，不要悲伤......</string>
 </resources>

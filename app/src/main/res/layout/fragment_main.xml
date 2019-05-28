@@ -216,7 +216,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="4dp"
                 android:background="#eeeeee" />
 
             <LinearLayout
@@ -236,6 +236,7 @@
 
                 <com.example.administrator.testclient.view.MyListView
                     android:id="@+id/line1"
+                    android:layout_marginTop="12dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:scrollbars="none"
