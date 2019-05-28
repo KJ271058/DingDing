@@ -1,21 +1,19 @@
 package com.example.administrator.testclient.fragment;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-//import com.facebook.drawee.view.SimpleDraweeView;
+import com.andview.refreshview.XRefreshView;
 import com.example.administrator.testclient.MyApplication;
 import com.example.administrator.testclient.R;
 import com.example.administrator.testclient.adapter.TextItemAdapter;
@@ -23,14 +21,15 @@ import com.example.administrator.testclient.bean.ImgUrl;
 import com.example.administrator.testclient.view.MyListView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.stx.xhb.xbanner.XBanner;
-import com.stx.xhb.xbanner.entity.LocalImageInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
-import static android.support.constraint.Constraints.TAG;
+//import com.facebook.drawee.view.SimpleDraweeView;
 
 public class Fragment_main extends MyFragment {
     @BindView(R.id.line1)
@@ -44,10 +43,13 @@ public class Fragment_main extends MyFragment {
     ImageView sousuo;
     @BindView(R.id.banner)
     XBanner banner;
+    @BindView(R.id.refresh)
+    XRefreshView refresh;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+
             line1.setAdapter(new TextItemAdapter(list));
             initBanner();
         }
@@ -56,13 +58,56 @@ public class Fragment_main extends MyFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setRefresh();
         getInfor();
+    }
+
+    private void setRefresh() {
+        refresh.setPullLoadEnable(true);
+        refresh.setXRefreshViewListener(new XRefreshView.XRefreshViewListener() {
+            @Override
+            public void onRefresh() {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        list.clear();
+                        getInfor();
+                        refresh.stopRefresh();
+                    }
+                },2000);
+            }
+
+            @Override
+            public void onRefresh(boolean isPullDown) {
+
+            }
+
+            @Override
+            public void onLoadMore(boolean isSilence) {
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        //填写加载更多的网络请求，一般page++
+                       getInfor();
+                       refresh.stopLoadMore();
+                    }
+                }, 1000);
+            }
+
+            @Override
+            public void onRelease(float direction) {
+
+            }
+
+            @Override
+            public void onHeaderMove(double headerMovePercent, int offsetY) {
+
+            }
+        });
     }
 
 
     private void getInfor() {
-        list.clear();
-        for (int i = 0; i < 55; i++) {
+        for (int i = 0; i < 5; i++) {
             list.add(i + "测试数据");
         }
         handler.sendEmptyMessage(200);
@@ -77,13 +122,13 @@ public class Fragment_main extends MyFragment {
         data.add(new ImgUrl("https://p2.ssl.qhimgs1.com/bdr/864__/t01b9381bea71afa5c2.jpg"));
         data.add(new ImgUrl("https://p0.ssl.qhimgs1.com/sdr/200_200_/t01c99fa99ef860d604.jpg"));
         data.add(new ImgUrl("https://p0.ssl.qhimgs1.com/bdr/864__/t0196686dc2a333456a.jpg"));
-        banner.setBannerData(R.layout.lunbo_layout,data);
-        banner.setAutoPlayAble(data.size()>0);
+        banner.setBannerData(R.layout.lunbo_layout, data);
+        banner.setAutoPlayAble(data.size() > 0);
         //设置广告图片点击事件
         banner.setOnItemClickListener((banner12, model, view, position) -> Toast.makeText(MyApplication.getContext(), "点击了第" + (position + 1) + "图片", Toast.LENGTH_SHORT).show());
         banner.loadImage((banner, model, view, position) -> {
             SimpleDraweeView draweeView = (SimpleDraweeView) view;
-            draweeView.setImageURI((String) ((ImgUrl)model).getXBannerUrl());
+            draweeView.setImageURI((String) ((ImgUrl) model).getXBannerUrl());
         });
     }
 
