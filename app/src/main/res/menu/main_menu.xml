@@ -6,7 +6,7 @@
         android:title="主页"/>
     <item
         android:id="@+id/moving_btn"
-        android:icon="@mipmap/moving_btn_on"
+        android:icon="@mipmap/moving_btn_off"
         android:title="操场"/>
     <item
         android:id="@+id/news_btn"
@@ -15,5 +15,5 @@
     <item
         android:id="@+id/wode_btn"
         android:icon="@mipmap/wode_btn_off"
-        android:title="消息"/>
+        android:title="我的"/>
 </menu>

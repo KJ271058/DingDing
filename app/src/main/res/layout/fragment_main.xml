@@ -1,31 +1,242 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollable"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:scrollbars="none"
-    android:id="@+id/scrollable">
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
+            android:paddingHorizontal="14dp"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:text="123131321321"
-            android:textSize="25dp" />
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
-        <ListView
-            android:id="@+id/line1"
-            android:scrollbars="none"
-            tools:listitem="@layout/text_item"
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/dizhi" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="成都职业技术学院"
+                android:textColor="#3f3e3e"
+                android:textSize="20sp"
+                android:theme="@style/app_fnot_style" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginHorizontal="14dp"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/main_sousuo_shape"
+            android:gravity="center_vertical"
+            android:padding="5dp">
 
-        </ListView>
+            <EditText
+                android:id="@+id/suo_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:imeOptions="actionDone"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:theme="@style/app_fnot_style" />
+
+            <ImageView
+                android:id="@+id/sousuo"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginHorizontal="5dp"
+                android:src="@mipmap/sousuo" />
+        </LinearLayout>
+
+        <com.stx.xhb.xbanner.XBanner
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="174dp"
+            app:AutoPlayTime="3000"
+            app:isAutoPlay="false"
+            app:isClipChildrenMode="true"
+            app:isHandLoop="true"
+            app:isShowIndicatorOnlyOne="true"
+            app:isShowNumberIndicator="false"
+            app:isShowTips="true"
+            app:pageChangeDuration="800"
+            app:pointsContainerBackground="@drawable/shape_round_8dp"
+            app:pointsPosition="RIGHT" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/yuan_btn_info3"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="27dp"
+                        android:src="@mipmap/order" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/order"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="订餐"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:theme="@style/app_fnot_style" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/yuan_btn_info"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="27dp"
+                        android:src="@mipmap/dake" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/curriculum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="查看课表"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:theme="@style/app_fnot_style" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/yuan_btn_icurriculum"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="27dp"
+                        android:src="@mipmap/chengjichaxun" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/score"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="成绩查询"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:theme="@style/app_fnot_style" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/yuan_btn_money"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="27dp"
+                        android:src="@mipmap/kuaidi" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/more"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="更多"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:theme="@style/app_fnot_style" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#eeeeee" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginHorizontal="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="动态"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:theme="@style/app_fnot_style" />
+
+            <com.example.administrator.testclient.view.MyListView
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                tools:listitem="@layout/text_item">
+
+            </com.example.administrator.testclient.view.MyListView>
+        </LinearLayout>
 
     </LinearLayout>
 

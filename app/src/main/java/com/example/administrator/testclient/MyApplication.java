@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Handler;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 import org.xutils.x;
 
 import java.util.HashSet;
@@ -18,6 +20,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fresco.initialize(this);
         mainHandler = new Handler();
         x.Ext.init(this);
         x.Ext.setDebug(false);

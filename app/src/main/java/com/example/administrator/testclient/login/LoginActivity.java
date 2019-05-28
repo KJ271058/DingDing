@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
@@ -51,6 +53,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private boolean verification = false;
     private ToggleButton password_on;
     private ZLoadingDialog zLoadingDialog;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            zLoadingDialog.cancel();
+            Toast.makeText(LoginActivity.this, "登录成功！！", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
+    };
 
 
     @Override
@@ -66,7 +78,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (student != null) {
             account.setText(student.getStuid());
             password.setText(student.getStupassword());
-           submit();
+//           submit();
         }
     }
 
@@ -151,7 +163,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // TODO validate success, do something
 
         TestLogin();
-        login(accountString, passwordString);
+//        login(accountString, passwordString);
 
     }
 
@@ -161,15 +173,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 .setLoadingColor(Color.RED)
                 .setHintText("登陆中")
                 .show();
-        try {
-            sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        zLoadingDialog.cancel();
-        Toast.makeText(LoginActivity.this, "登录成功！！", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(LoginActivity.this,MainActivity.class));
-        finish();
+        new Thread(() -> {
+            try {
+                sleep(4000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            handler.sendEmptyMessage(200);
+        }).start();
+
     }
 
 
@@ -186,12 +198,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             HttpUtils.post("login", object, new HttpUtils.MyResponseHandler() {
                 @Override
                 protected void mySuccess(String s) {
-                    Student stu=HttpUtils.toObject(s,Student.class);
+                    Student stu = HttpUtils.toObject(s, Student.class);
                     HttpUtils.saveUser(stu);
-                    zLoadingDialog.cancel();
-                    Toast.makeText(LoginActivity.this, "登录成功！！", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                    finish();
+                    handler.sendEmptyMessage(200);
                 }
 
                 @Override

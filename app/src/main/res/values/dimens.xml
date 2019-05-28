@@ -6,5 +6,6 @@
     <dimen name="title">48px</dimen>
     <dimen name="setting">36px</dimen>
     <dimen name="text">48px</dimen>
-
+    <dimen name="design_bottom_navigation_active_text_size">18dp</dimen>
+    <dimen name="design_bottom_navigation_text_size">14dp</dimen>
 </resources>
